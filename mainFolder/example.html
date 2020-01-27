@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<!-- saved from url=(0209)https://no.jooble.org/desc/-7970688767273553755?ckey=deltid&rgn=1754&pos=5&elckey=3488887088444174928&p=1&sid=6274272256391239992&age=980&relb=100&brelb=100&bscr=2312,9429&scr=2312,9429&iid=2908956836811626390 -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="no-NO"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./example_files/f.txt"></script><script src="./example_files/105024613572435" async=""></script><script async="" src="./example_files/fbevents.js.last ned"></script><script async="" src="./example_files/gtm.js.last ned"></script><script async="" src="./example_files/analytics.js.last ned"></script><script>(function(){function yTZhF() {
+  //<![CDATA[
+  window.UgtYjrj = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.iKVYimC = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  
+  if (!['http:', 'https:'].includes(window.location.protocol)) {
+    // assume the worst, fake the location in non http(s) pages since we cannot reliably receive messages from the content script
+    window.TvVwJ = true;
+    window.pSCMm = 38.883333;
+    window.dBvNo = -77.000;
+  }
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.TvVwJ !== 'undefined')) {
+      if (window.TvVwJ === true) {
+        window.kkAMdlh({
+          coords: {
+            latitude: window.pSCMm,
+            longitude: window.dBvNo,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.UgtYjrj(window.kkAMdlh, window.keNyyKU, window.BBunp);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.TvVwJ !== 'undefined')) {
+      if (window.TvVwJ === true) {
+        navigator.getCurrentPosition(window.DoRIBGs, window.arxiPUu, window.qYnNt);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.iKVYimC(window.DoRIBGs, window.arxiPUu, window.qYnNt);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.kkAMdlh = successCallback;
+    window.keNyyKU = errorCallback;
+    window.BBunp = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.DoRIBGs = successCallback;
+    window.arxiPUu = errorCallback;
+    window.qYnNt = options;
+    waitWatchPosition();
+  };
+
+  const instantiate = (constructor, args) => {
+    const bind = Function.bind;
+    const unbind = bind.bind(bind);
+    return new (unbind(constructor, null).apply(null, args));
+  }
+
+  Blob = function (_Blob) {
+    function secureBlob(...args) {
+      const injectableMimeTypes = [
+        { mime: 'text/html', useXMLparser: false },
+        { mime: 'application/xhtml+xml', useXMLparser: true },
+        { mime: 'text/xml', useXMLparser: true },
+        { mime: 'application/xml', useXMLparser: true },
+        { mime: 'image/svg+xml', useXMLparser: true },
+      ];
+      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+
+      if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
+        const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());
+        if (mimeTypeIndex >= 0) {
+          let mimeType = injectableMimeTypes[mimeTypeIndex];
+          let injectedCode = `<script>(
+            ${yTZhF}
+          )();<\/script>`;
+    
+          let parser = new DOMParser();
+          let xmlDoc;
+          if (mimeType.useXMLparser === true) {
+            xmlDoc = parser.parseFromString(args[0].join(''), mimeType.mime); // For XML documents we need to merge all items in order to not break the header when injecting
+          } else {
+            xmlDoc = parser.parseFromString(args[0][0], mimeType.mime);
+          }
+
+          if (xmlDoc.getElementsByTagName("parsererror").length === 0) { // if no errors were found while parsing...
+            xmlDoc.documentElement.insertAdjacentHTML('afterbegin', injectedCode);
+    
+            if (mimeType.useXMLparser === true) {
+              args[0] = [new XMLSerializer().serializeToString(xmlDoc)];
+            } else {
+              args[0][0] = xmlDoc.documentElement.outerHTML;
+            }
+          }
+        }
+      }
+
+      return instantiate(_Blob, args); // arguments?
+    }
+
+    // Copy props and methods
+    let propNames = Object.getOwnPropertyNames(_Blob);
+    for (let i = 0; i < propNames.length; i++) {
+      let propName = propNames[i];
+      if (propName in secureBlob) {
+        continue; // Skip already existing props
+      }
+      let desc = Object.getOwnPropertyDescriptor(_Blob, propName);
+      Object.defineProperty(secureBlob, propName, desc);
+    }
+
+    secureBlob.prototype = _Blob.prototype;
+    return secureBlob;
+  }(Blob);
+
+  Object.freeze(navigator.geolocation);
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'iyyRIuN':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.pSCMm = message.info.coords.lat;
+          window.dBvNo = message.info.coords.lon;
+          window.TvVwJ = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+  //]]>
+}yTZhF();})()</script>
+	<link rel="prefetch" href="./example_files/logo2.svg">
+	<link rel="dns-prefetch" href="https://www.google.com/">
+	<link rel="dns-prefetch" href="https://www.google-analytics.com/">
+	<link rel="dns-prefetch" href="https://apis.google.com/">
+	<link rel="dns-prefetch" href="https://www.googletagservices.com/">
+	<link rel="dns-prefetch" href="https://connect.facebook.net/">
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+	<link rel="preload" href="./example_files/analytics.js.last ned" as="script">
+	
+		<title>Jooble - Pizzabaker deltid</title>
+		<meta name="description" content="Søk på &quot;Pizzabaker deltid&quot;. Vis lignende jobber på https://no.jooble.org.">
+		<link rel="canonical" href="https://no.jooble.org/desc/-7970688767273553755">
+		<link rel="alternate" media="only screen and (max-width: 640px)" href="https://no.jooble.org/desc/-7970688767273553755">
+
+	<meta property="og:url" content="https://no.jooble.org/desc/-7970688767273553755?ckey=deltid&amp;rgn=1754&amp;pos=5&amp;elckey=3488887088444174928&amp;p=1&amp;sid=6274272256391239992&amp;age=980&amp;relb=100&amp;brelb=100&amp;bscr=2312,9429&amp;scr=2312,9429&amp;iid=2908956836811626390">
+	<meta property="og:title" content="Jooble - Pizzabaker deltid">
+	<meta property="og:description" content="Søk på &quot;Pizzabaker deltid&quot;. Vis lignende jobber på https://no.jooble.org.">
+	<meta property="og:image" content="https://no.jooble.org/css/images/open_graph/image.png">
+	<meta property="og:type" content="website">
+	<meta property="og:locale" content="no_NO">
+	<meta property="og:site_name" content="Jooble">
+
+		<meta name="robots" content="noindex, nofollow">
+
+		<script async="" src="./example_files/f(1).txt"></script>
+
+	    <link rel="apple-touch-icon" href="https://no.jooble.org/css/images/favicon/apple-touch-icon.png?v=2">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-57x57.png?v=2">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-72x72.png?v=2">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-114x114.png?v=2">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-144x144.png?v=2">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://no.jooble.org/css/images/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://no.jooble.org/css/images/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://no.jooble.org/css/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="https://no.jooble.org/css/images/favicon/android-chrome-48x48.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://no.jooble.org/css/images/favicon/android-chrome-96x96.png">
+    <link rel="icon" type="image/png" sizes="144x144" href="https://no.jooble.org/css/images/favicon/android-chrome-144x144.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://no.jooble.org/css/images/favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="194x194" href="https://no.jooble.org/css/images/favicon/favicon-194x194.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="https://no.jooble.org/css/images/favicon/android-chrome-256x256.png">
+    <link rel="icon" type="image/png" sizes="384x384" href="https://no.jooble.org/css/images/favicon/android-chrome-384x384.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://no.jooble.org/css/images/favicon/android-chrome-512x512.png">
+    <link rel="mask-icon" href="https://no.jooble.org/css/images/favicon/safari-pinned-tab.svg" color="#1f75cc">
+    <link rel="shortcut icon" type="image/x-icon" href="https://no.jooble.org/css/images/favicon/favicon.ico?v=2">
+    <link rel="icon" href="https://no.jooble.org/css/images/favicon/icon.svg" sizes="any" type="image/svg+xml">
+    <meta name="msapplication-tooltip" content="Jooble">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/css/images/favicon/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+<link href="./example_files/commonDesk.css" rel="stylesheet" type="text/css">
+<link href="./example_files/jdpDesk.css" rel="stylesheet" type="text/css">
+
+		<script>
+		SocialApiKeys = {
+			facebook: '581976785309621',
+			linkedIn: '772ot928h1q8sr',
+			google: '1072888013949-2ef6i07bqio0ltg5pgom5e2ivjt9nofe.apps.googleusercontent.com'
+		};
+
+		//Social registration types (enum)
+		RegistrationType = { facebook: 1, linkedIn: 2, google: 5 };
+	</script>
+
+
+<script src="./example_files/bundle.min.js.last ned" crossorigin="anonymous"></script><script src="./example_files/f(2).txt"></script></head>
+<body>
+	<noscript>
+
+<div class="error-block">
+	Javascript m&#229; v&#230;re aktivert for forsvarlig drift av nettstedet. Vennligst aktiver Javascript i nettleserens innstillinger eller bruk den andre som st&#248;tter Javascript.
+</div>
+
+	</noscript>
+	<div class="error-block pre-animation error-block-js">Beklager, men en feil oppstod og serveren kan ikke behandle din forespørsel for øyeblikket. Prøv igjen om noen minutter.</div>
+
+	
+
+
+<input type="hidden" value="{&quot;FileSize&quot;:2097152,&quot;FileTypes&quot;:&quot;.txt, .doc, .docx, .rtf, .pdf, .odt&quot;}" id="applyFormSettings">
+	<input type="hidden" value="{&quot;Interval&quot;:4,&quot;Points&quot;:5,&quot;JdpId&quot;:&quot;-7193658104705252516&quot;,&quot;TextLength&quot;:2225}" id="onScreenSettings">
+
+<input type="hidden" value="{&quot;jdpId&quot;:&quot;-7193658104705252516&quot;,&quot;applyFormType&quot;:0,&quot;jobUid&quot;:&quot;-7970688767273553755&quot;,&quot;searchId&quot;:&quot;6274272256391239992&quot;,&quot;alertviewId&quot;:&quot;0&quot;,&quot;sourceApplyUrlEnable&quot;:false,&quot;contactUrl&quot;:&quot;https://no.jooble.org/away/-7970688767273553755?p=1\u0026pos=0\u0026sid=6274272256391239992\u0026age=981\u0026relb=100\u0026brelb=100\u0026scr=2312,9429\u0026bscr=2312,9429\u0026jdp=1\u0026iid=2908956836811626390\u0026scid=834862688365058238\u0026jdpid=-7193658104705252516\u0026crId=NO_-2995657652709510426NO_1754&quot;,&quot;sessionClickId&quot;:&quot;834862688365058238&quot;,&quot;impressionId&quot;:&quot;2908956836811626390&quot;,&quot;projectId&quot;:2,&quot;jobTitle&quot;:&quot;Pizzabaker deltid&quot;,&quot;jobCity&quot;:&quot;Sandnes&quot;,&quot;projectName&quot;:&quot;finn.no&quot;,&quot;applyVacancyUrl&quot;:&quot;https://no.jooble.org/away/-7970688767273553755?p=1\u0026pos=0\u0026sid=6274272256391239992\u0026age=981\u0026relb=100\u0026brelb=100\u0026scr=2312,9429\u0026bscr=2312,9429\u0026jdp=1\u0026iid=2908956836811626390\u0026scid=834862688365058238\u0026jdpid=-7193658104705252516\u0026crId=NO_-2995657652709510426NO_1754&quot;}" id="jdpState">
+<input type="hidden" value="{&quot;timePeriod&quot;:7,&quot;countShowing&quot;:2,&quot;isActive&quot;:true,&quot;jdpId&quot;:&quot;-7193658104705252516&quot;}" id="abandonFormSettings">
+
+
+
+<div class="serp jdpLayout">
+	<div class="serp_cont vacancy-page-content">
+
+
+
+<div class="search_form_pnl new-sf_pnl">
+	<div class="logo_wrapper">
+		<a href="https://no.jooble.org/" title="" id="aDefault" class="vac_desc-logo">
+			<img id="logo-img" src="./example_files/logo2.svg" onerror=" this.src = &#39;/css/images/logos/logo2.png&#39;; this.onerror = null; " alt="Jooble Jobb">
+		</a>
+	</div>
+
+
+		<form id="searchForm" action="https://no.jooble.org/SearchResult/Search" method="POST">
+				<div class="column">
+					<input autocomplete="off" class="kwd-autocomplete" id="tbKeywords" name="Position" placeholder="Stilling" type="text" value="deltid"><div class="autocomplete-suggestions autocomplete-search autocomplete-keyword" style="position: absolute; display: none; width: 100%; max-height: 400px; z-index: 9999;"></div>
+				</div>
+				<div class="column region-col">
+					<input autocomplete="off" class="rgn-autocomplete" id="tbRegion" name="Region" placeholder="Sted" type="text" value="Stavanger"><div class="autocomplete-suggestions autocomplete-search autocomplete-region" style="position: absolute; display: none; width: 100%; max-height: 400px; z-index: 9999;"></div>
+											<div class="clicker" id="divRgnClear" data-href="https://no.jooble.org/jobb-deltid" style="cursor: pointer;">
+							<a id="aHelp" style="width: 16px; height: 16px;"></a>
+						</div>
+				</div>
+			<div class="button-wrap">
+				<input type="submit" id="lbSearch" class="button" value="Søk!">
+			</div>
+			<div class="clear"></div>
+			<input data-val="true" data-val-required="The Page field is required." id="Page" name="Page" type="hidden" value="Desc">
+			<input data-val="true" data-val-number="The field Salary must be a number." data-val-required="The Salary field is required." id="salary" name="salary" type="hidden" value="0">
+			<input id="jt" name="jt" type="hidden" value="0">
+		</form>
+	<div class="right-items_wr ">
+				<a class="ea-button ea-button-js " href="https://no.jooble.org/employer/jobposting">
+					<span class="text">For arbeidsgiver</span>
+				</a>
+		
+<div class="user_wrapper  ">
+			<a class="login_btn blue-header_btn" id="loginButton" onclick="ga_AccountSignUpButton();">Logg inn</a>
+
+</div>
+
+	</div>
+</div>
+		<div class="vacancy-desc_wrapper content-wrapper">
+			
+
+
+
+	<div class="jobdesc_nav-wr">
+			<div class="jdp-container" style="padding-top: 0px;">
+				<button type="button" data-href="https://no.jooble.org/JobDesc/ReturnToSerp/-7970688767273553755?ckey=deltid&amp;rgn=1754&amp;pos=5&amp;elckey=3488887088444174928&amp;p=1&amp;sid=6274272256391239992&amp;scid=834862688365058238&amp;iid=2908956836811626390&amp;age=981&amp;relb=100&amp;brelb=100&amp;bscr=2312,9429&amp;scr=2312,9429&amp;jdpid=-7193658104705252516" class="results_link" id="backToSerpLink" style="cursor: pointer;">
+					Resultater
+				</button>
+					<p class="result_count"><span class="counter_current">5</span> ut av <span class="counter_total">100</span> jobber</p>
+			</div>
+	</div>
+	<div class="insideContent-width jdp_body-wr" id="jobdesc-body" data-uid="-7970688767273553755" data-session-click-id="0" data-jdpid="-7193658104705252516">
+		<div class="jdp_arrow-wr arrow_left">
+				<a href="https://no.jooble.org/desc/-1397348298526034146?ckey=deltid&amp;rgn=1754&amp;pos=4&amp;elckey=3488887088444174928&amp;p=1&amp;sid=6274272256391239992&amp;scid=834862688365058238&amp;iid=2908956836811626390&amp;age=150&amp;relb=100&amp;brelb=100&amp;bscr=2384,177&amp;scr=2384,177&amp;jdp=1&amp;jdpid=-7193658104705252516&amp;arw=2" id="prevArrow" class="arrow_link">
+					<svg width="34" height="70" viewBox="0 0 34 70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<path fill="#5497D5" fill-rule="evenodd" d="M 33.1577 2.00989L 3.60132 35L 33.1577 67.9901L 31.3572 70L 0 35L 31.3572 0L 33.1577 2.00989Z"></path>
+					</svg>
+				</a>
+		</div>
+		<div class="jdp_wrapper">
+			<div class="jdp-container">
+				<div class="jdp_header jdp-action-btns-wrap-js" id="jdpHeader">
+					<div class="jdp_header-container ">
+						<div class="jdp_action-btn-wrap">
+									<a data-attr-test_btn="AwayTop" href="https://no.jooble.org/away/-7970688767273553755?p=1&amp;pos=0&amp;sid=6274272256391239992&amp;age=981&amp;relb=100&amp;brelb=100&amp;scr=2312,9429&amp;bscr=2312,9429&amp;jdp=1&amp;iid=2908956836811626390&amp;scid=834862688365058238&amp;jdpid=-7193658104705252516&amp;crId=NO_-2995657652709510426NO_1754" class="respond-vacancy_button jdp-respond-btn jdp-respond-btn_away" onclick="jdt();jdpAction(&#39;-7193658104705252516&#39;, 1, 0, 1, &#39;-7970688767273553755&#39;);ga_JdpClickAwayTotal();" rel="nofollow">
+			Søknad
+		</a>
+
+							
+						</div>
+						<div class="jdp-saveStarBtn">
+							<button class="vacancy-save_StarBtn unsaved" onclick="jdsv();">
+								<span class="saveBtn_icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20">
+										<path fill="none" d="M10.5.5l2.53 7.06 7.47.2-5.9 4.8 2.08 6.94-6.18-3.84-6.18 3.84 2.08-6.93L.5 7.76l7.47-.2L10.5.5"></path>
+										<path fill="none" class="star-stroke" stroke="#cfcfd0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="50" d="M10.5.5l2.53 7.06 7.47.2-5.9 4.8 2.08 6.94-6.18-3.84-6.18 3.84 2.08-6.93L.5 7.76l7.47-.2L10.5.5"></path>
+									</svg>
+								</span>
+									<span class="saveBtn_text">Lagre</span>
+							</button>
+
+							<button class="vacancy-save_StarBtn saved none" onclick="window.location = &#39;/Account/Saved&#39;">
+								<span class="saveBtn_icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+										<path fill="#a4cbe4" class="star-fill" d="M10 0l2.53 7.06 7.47.2-5.9 4.8L16.18 19 10 15.16 3.82 19l2.08-6.93L0 7.26l7.47-.2L10 0"></path>
+									</svg>
+								</span>
+									<span class="saveBtn_text">Lagt til i Mine lagrede jobber</span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="vacancy-desc_info">
+
+										<h1 class="desc_info-header">
+						
+						<span class="vacancy__position-icon hide-block-design-test"></span>
+						Pizzabaker deltid
+					</h1>
+
+					<table class="jdp_info-table">
+							<tbody><tr>
+								<td class="title-column st348-title-column">Firma:</td>
+								<td class="value-column">
+										<a id="companyInfoLink" data-company="-8841059264142635075" class="company_name company_name-link" href="https://no.jooble.org/company/-8841059264142635075/Pizzabakeren?jdpid=-7193658104705252516" rel="&quot;nofollow&quot;">
+											Pizzabakeren Invest AS Pizzabakeren Invest AS
+										</a>
+									
+									<span class="company__aditional-info hide-block-design-test"></span>
+								</td>
+							</tr>
+						
+
+							<tr>
+									<td class="title-column">Sted:</td>
+									<td class="value-column">
+										Sandnes									</td>
+							</tr>
+																	</tbody></table>
+
+						<span class="description-separator">Jobb-beskrivelse</span>
+										<!-- This block exists within ST#297 -->
+				</div>
+
+				<div class="vacancy-desc_text_wrapper">
+					<div class="desc_text_paragraph ">
+<p> Pizzabakeren Stangeland lager og serverer super god pizza til alle pizza elskere i Sandnes. Vi trenger nå: </p><p></p><p><b> PIZZABAKERE (deltid)</b></p><p></p><p></p><p> Som pizzabaker hos oss får du boltre deg på kjøkkenet med ferske bunner, ferske og smaksrike ingredienser – og ekte ost fra Tine. Så snart du er ferdig opplært kommer du til å lage pizzaer så gode at kundene kommer igjen og igjen. Du trenger ikke kokkeutdanning for å jobbe hos oss, men du bør elske å lage mat. Og være lærevillig, da vi lærer deg alt du trenger å kunne. </p><p> Du må også tåle høyt tempo, for det blir heldigvis travelt hos oss rett som det er. Og så må du være vennlig og sosial, og forstå hva som skal til for at både kollegaer og kunder skal trives rundt deg. </p><p> Folk spiser pizza på dagtid, kvelder og i helger, så det er da du trengs hos oss. Noen vil også ha pizzaen levert hjem på døren, derfor <b> må&nbsp;</b><b> du ha sertifikat for bil (manuelt gir)</b>slik at du kan kjøre pizzabilen vår. <b> Du må også beherske norsk skriftlig og muntlig. </b></p><p> Hos oss får du: </p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kule kolleger </p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ryddige arbeidsforhold </p><p>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Og ikke minst sjansen til å møte de mange pizza elskerne i Sandnes!</p><p></p> Blir du glad i pizzahjertet ditt av å lese dette, gleder vi oss til å høre fra deg!<p></p><em><b> Søkere som ikke oppfyller krav om førerkort og språk, vil ikke bli vurdert. </b></em><p></p><p> Pizzabakeren respekterer dine krav til personvern.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><p> Vi i Pizzabakeren setter stor pris at du har valgt å søke på jobb hos oss. </p><p> Vi gjør deg oppmerksom på at vi følger alle gjeldende forskrifter for behandling av opplysninger om søkere og ansatte, slik at du kan føle deg trygg. </p><p> Din personlige informasjon er beskyttet av personopplysningsloven og Pizzabakeren er forpliktet til å behandle denne informasjonen på en sikker måte. </p><p> Når ansettelsesprosessen er over så vil alle personopplysninger til de søkere som ikke fikk jobben slettes. </p><p> Ved ansettelse vil du få en erklæringen om vår personvernpolicy som gir deg informasjon om hvilke opplysninger vi samler inn, </p><p> hvordan vi behandler de opplysningene og hvilke opplysninger vi lagrer.&nbsp;&nbsp; Ref  </p><p></p>					</div>
+				</div>
+
+					<p class="vacancy-add_date vacancy-add_date__bottom">Jobben ble lagt til på finn.no for 1 måneder siden</p>
+				<div class="jdp_footer  jdp-action-btns-wrap-js">
+					<div class="jdp_action-btn-wrap">
+								<a data-attr-test_btn="AwayBottom" href="https://no.jooble.org/away/-7970688767273553755?p=1&amp;pos=0&amp;sid=6274272256391239992&amp;age=981&amp;relb=100&amp;brelb=100&amp;scr=2312,9429&amp;bscr=2312,9429&amp;jdp=1&amp;iid=2908956836811626390&amp;scid=834862688365058238&amp;jdpid=-7193658104705252516&amp;crId=NO_-2995657652709510426NO_1754" class="respond-vacancy_button jdp-respond-btn jdp-respond-btn_away" onclick="jdb();jdpAction(&#39;-7193658104705252516&#39;, 1, 0, 2, &#39;-7970688767273553755&#39;);ga_JdpClickAwayTotal();" rel="nofollow">
+			Søknad
+		</a>
+
+						
+					</div>
+					<div class="jdp-saveStarBtn">
+						<button class="vacancy-save_StarBtn unsaved" onclick="jdsv();">
+							<span class="saveBtn_icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20">
+									<path fill="none" d="M10.5.5l2.53 7.06 7.47.2-5.9 4.8 2.08 6.94-6.18-3.84-6.18 3.84 2.08-6.93L.5 7.76l7.47-.2L10.5.5"></path>
+									<path fill="none" class="star-stroke" stroke="#cfcfd0" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="50" d="M10.5.5l2.53 7.06 7.47.2-5.9 4.8 2.08 6.94-6.18-3.84-6.18 3.84 2.08-6.93L.5 7.76l7.47-.2L10.5.5"></path>
+								</svg>
+							</span>
+								<span class="saveBtn_text">Lagre</span>
+						</button>
+
+						<button class="vacancy-save_StarBtn saved none" onclick="window.location = &#39;/Account/Saved&#39;">
+							<span class="saveBtn_icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+									<path fill="#a4cbe4" class="star-fill" d="M10 0l2.53 7.06 7.47.2-5.9 4.8L16.18 19 10 15.16 3.82 19l2.08-6.93L0 7.26l7.47-.2L10 0"></path>
+								</svg>
+							</span>
+								<span class="saveBtn_text">Lagt til i Mine lagrede jobber</span>
+						</button>
+					</div>
+				</div>
+						<div class="cont-ads_wrap">
+			<ins class="adsbygoogle" data-ad-client="ca-pub-3791762806325978" data-ad-slot="5297331215" data-ad-channel="6728210057">
+			</ins>
+		</div>
+
+			</div>
+			
+		</div>
+		<div class="jdp_arrow-wr arrow_right">
+
+				<a href="https://no.jooble.org/desc/2864629956227705393?ckey=deltid&amp;rgn=1754&amp;pos=6&amp;elckey=3488887088444174928&amp;p=1&amp;sid=6274272256391239992&amp;scid=834862688365058238&amp;iid=2908956836811626390&amp;age=255&amp;relb=100&amp;brelb=100&amp;bscr=2256,4119&amp;scr=2256,4119&amp;jdp=1&amp;jdpid=-7193658104705252516&amp;arw=1" id="nextArrow" class="arrow_link">
+					<svg width="34" height="73" viewBox="0 0 34 73" xmlns="http://www.w3.org/2000/svg">
+						<path transform="rotate(180 17 36.5)" fill="#5497D5" fill-rule="evenodd" d="M 33.1577 70.3876L 3.60132 36.2341L 33.1577 2.08069L 31.3572 0L 0 36.2341L 31.3572 72.4683L 33.1577 70.3876Z"></path>
+					</svg>
+				</a>
+		</div>
+	</div>
+
+	<script>
+		var isOpenApplyPopup = 'False';
+		var applyFormType = 'NoApply';
+		var applyFormData = {
+			jobUid: '-7970688767273553755',
+			jdpId: '-7193658104705252516',
+			projectId: '2',
+			searchId: '6274272256391239992',
+			alertViewId: '0',
+			impressionId: '2908956836811626390',
+			sessionClickId: '834862688365058238',
+			forceOpen: '6',
+			projectName: 'finn.no',
+			applyVacancyUrl: 'https://no.jooble.org/away/-7970688767273553755?p=1\u0026pos=0\u0026sid=6274272256391239992\u0026age=981\u0026relb=100\u0026brelb=100\u0026scr=2312,9429\u0026bscr=2312,9429\u0026jdp=1\u0026iid=2908956836811626390\u0026scid=834862688365058238\u0026jdpid=-7193658104705252516\u0026crId=NO_-2995657652709510426NO_1754',
+			title: 'Pizzabaker deltid',
+			region: 'Sandnes'
+		}
+	</script>
+
+
+<script type="text/template" id="confirmCompanyTitle">
+	<h4 class="company-confirm_title">Bekreftet</h4>
+	<p class="company-confirm_text">Denne arbedsgiverkontoen er bekreftet av Jooble-teamet</p>
+</script>
+
+		</div>
+		<div id="footerContainer">
+
+<nav id="footer" class="footer">
+	<div class="row">
+
+			<ul class="footerlistUrls">
+					<li class="footerlistUrls__item">
+						<a data-href="https://no.jooble.org/info/about" style="cursor: pointer;">Om jooble</a>
+					</li>
+					<li class="footerlistUrls__item">
+						<a data-href="https://no.jooble.org/partner/ppc" style="cursor: pointer;">Til Samarbeidspartnere</a>
+					</li>
+					<li class="footerlistUrls__item">
+						<a data-href="https://no.jooble.org/partner/for-publishers" style="cursor: pointer;">Til Web-utgivere</a>
+					</li>
+					<li class="footerlistUrls__item">
+						<a href="https://no.jooble.org/queries">Populære jobber</a>
+					</li>
+			</ul>
+			<ul class="footerlistUrls">
+					<li class="footerlistUrls__item">
+						<a data-href="https://no.jooble.org/info/terms" style="cursor: pointer;">Vilkår for bruk</a>
+					</li>
+					<li class="footerlistUrls__item">
+						<a href="https://no.jooble.org/m/desc/-7970688767273553755?ckey=deltid&amp;rgn=1754&amp;pos=5&amp;elckey=3488887088444174928&amp;p=1&amp;sid=6274272256391239992&amp;age=980&amp;relb=100&amp;brelb=100&amp;bscr=2312,9429&amp;scr=2312,9429&amp;iid=2908956836811626390" onclick="setMobileCookie();">Mobilvisning</a>
+					</li>
+					<li class="footerlistUrls__item">
+						<a href="https://no.jooble.org/">Ledige stillinger</a>
+					</li>
+			</ul>
+
+		<div class="footerSocial">
+			
+			<p class="footerSocial__copy">© 2007-2020 <a class="aJoobleMain" href="https://no.jooble.org/">jooble</a></p>
+		</div>
+	</div>
+</nav>
+		</div>
+	</div>
+</div>
+
+<textarea rows="5" id="covering-container" class="none">Heisann.
+Jeg kom over din stillingsannonse på Pizzabaker deltid på Jooble. Vennligst referer til min vedlagte CV.
+Jeg håper min søknad mottar gunstig vurdering.</textarea>
+
+<div class="thnkpopupdark">
+	<div class="thnkpopupdark_body">
+		<p class="thnkpopupdark_title">Tusen takk!</p>
+	</div>
+</div>
+
+<script type="text/template" id="errorEmpty">
+	<span class="error-empty">For å søke på denne stillingen vennligst send inn en oppdatert CV.</span>
+</script>
+
+<script type="text/template" id="errorEmptyFile">
+	<span class="error-empty">Denne filen er tom.</span>
+</script>
+
+<script type="text/template" id="errorSize">
+	<span class="error-size">Størrelsen på filen må ikke overstige 1MB</span>
+</script>
+
+<script type="text/template" id="errorType">
+	<span class="error-type">Ugyldig filtype</span>
+</script>
+
+<script type="text/template" id="fileMsg">
+	Ingen fil valgt
+</script>
+
+	<div id="popup">
+	</div>
+	<div id="static_popups">
+<div class="small-popup popup_main" id="ReSubscribePopup" data-fade="3000" style="display: none;">
+	<div class="small-mail popup_wr">
+		<div class="arrow close"></div>
+		<p><span class="small-popup-title">Abonnement ferdig.</span><br>
+		<span class="small-popup-text">Du vil få ditt første brev neste morgen</span></p>
+	</div>
+</div>
+
+	</div>
+
+	<script type="application/ld+json">
+		{
+  "@context": "http://schema.org/",
+  "@type": "JobPosting",
+  "title": "Pizzabaker deltid",
+  "description": "<p> Pizzabakeren Stangeland lager og serverer super god pizza til alle pizza elskere i Sandnes. Vi trenger nå: </p><p></p><p><b> PIZZABAKERE (deltid)<p></p></b></p><p> Som pizzabaker hos oss får du boltre deg på kjøkkenet med ferske bunner, ferske og smaksrike ingredienser – og ekte ost fra Tine. Så snart du er ferdig opplært kommer du til å lage pizzaer så gode at kundene kommer igjen og igjen. Du trenger ikke kokkeutdanning for å jobbe hos oss, men du bør elske å lage mat. Og være lærevillig, da vi lærer deg alt du trenger å kunne. </p><p> Du må også tåle høyt tempo, for det blir heldigvis travelt hos oss rett som det er. Og så må du være vennlig og sosial, og forstå hva som skal til for at både kollegaer og kunder skal trives rundt deg. </p><p> Folk spiser pizza på dagtid, kvelder og i helger, så det er da du trengs hos oss. Noen vil også ha pizzaen levert hjem på døren, derfor <b> må </b><b> du ha sertifikat for bil (manuelt gir)</b>slik at du kan kjøre pizzabilen vår. <b> Du må også beherske norsk skriftlig og muntlig. </b></p><p> Hos oss får du: </p><p>-        Kule kolleger </p><p>-        Ryddige arbeidsforhold </p><p>-        Og ikke minst sjansen til å møte de mange pizza elskerne i Sandnes!</p><p></p> Blir du glad i pizzahjertet ditt av å lese dette, gleder vi oss til å høre fra deg!<p></p><em><b> Søkere som ikke oppfyller krav om førerkort og språk, vil ikke bli vurdert. </b></em><p></p><p> Pizzabakeren respekterer dine krav til personvern.                                                                                                                                                            </p><p> Vi i Pizzabakeren setter stor pris at du har valgt å søke på jobb hos oss. </p><p> Vi gjør deg oppmerksom på at vi følger alle gjeldende forskrifter for behandling av opplysninger om søkere og ansatte, slik at du kan føle deg trygg. </p><p> Din personlige informasjon er beskyttet av personopplysningsloven og Pizzabakeren er forpliktet til å behandle denne informasjonen på en sikker måte. </p><p> Når ansettelsesprosessen er over så vil alle personopplysninger til de søkere som ikke fikk jobben slettes. </p><p> Ved ansettelse vil du få en erklæringen om vår personvernpolicy som gir deg informasjon om hvilke opplysninger vi samler inn, </p><p> hvordan vi behandler de opplysningene og hvilke opplysninger vi lagrer.   Ref  </p><p></p>",
+  "datePosted": "2019-12-17",
+  "validThrough": null,
+  "employmentType": [],
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Pizzabakeren Invest AS Pizzabakeren Invest AS",
+    "sameAs": "www.pizzabakeren.no",
+    "logo": "https://ua-content.jooble.org/company/no/-8841059264142635075.png"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": null,
+      "addressLocality": "Sandnes",
+      "addressRegion": null,
+      "postalCode": null,
+      "addressCountry": "NO"
+    }
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "NOK",
+    "value": ""
+  }
+}
+	</script>
+
+	<script sync="" src="./example_files/client"></script>
+	<script>var googleClientId="1072888013949-2ef6i07bqio0ltg5pgom5e2ivjt9nofe.apps.googleusercontent.com";</script>
+	<div id="oneTapModal"></div>
+
+		<input class="one-tap-sign-in" hidden="">
+
+
+
+
+	<script type="text/javascript">
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			},
+			i[r].l = 1 * new Date(); a = s.createElement(o),
+			m = s.getElementsByTagName(o)[0]; a.async = 1;
+			a.src = g; m.parentNode.insertBefore(a, m)
+		})
+		(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+		ga('create', 'UA-2246747-50', 'auto', { userId: '-7755684621862584572' });
+
+				ga('set', 'dimension7', '10');
+					ga('send', 'pageview');
+			
+				function sendGaEvent(eventCategory, eventAction, eventLabel, eventValue) {
+					if (window.matchMedia('(display-mode: standalone)').matches) {
+						window.ga('set', 'dimension3', window.navigator.onLine);
+					}
+
+					window.ga('send', 'event', eventCategory, eventAction, eventLabel, eventValue);
+				}
+
+				function nrl() { sendGaEvent('noResultFromLetter', 'noResultFromLetterEvent', 'NoResFromLetter'); }
+				function bl() { sendGaEvent('Urls', 'Click', 'PositionUrl'); }
+				function rml() { sendGaEvent('Urls', 'Click', 'Read More'); }
+
+				function pvf() { sendGaEvent('Subscribe', 'Click', 'PopupSubscribeClickValidationFailed'); }
+				function pvp() { sendGaEvent('Subscribe', 'Click', 'PopupSubscribeClickValidationPassed'); }
+				function sbp() { sendGaEvent('Subscribe', 'Click', 'PopupSubscribeClick'); }
+				function sbr() { sendGaEvent('Subscribe', 'Click', 'RightSubscribeClick'); }
+				function sbb() { sendGaEvent('Subscribe', 'Click', 'BottomSubscribeClick'); }
+				function sbn() { sendGaEvent('Subscribe', 'Click', 'NoResultsSubscribeClick'); }
+
+				function ga_SubscribePopupYes() { sendGaEvent('Subscribe', 'Click', 'SubscribePopusQuestion_Yes'); }
+				function ga_SubsDesktopPopup() {
+					sendGaEvent('Subscribe', 'Click', 'SubsDesktopPopup');
+					ga_GetUserEmail();
+				}
+				function ga_SubsDesktopSidebar() {
+					sendGaEvent('Subscribe', 'Click', 'SubsDesktopSidebar');
+					ga_GetUserEmail();
+				}
+				function ga_SubsDesktopFooter() {
+					sendGaEvent('Subscribe', 'Click', 'SubsDesktopFooter');
+					ga_GetUserEmail();
+				}
+				function ga_SubsDesktopNoRes() {
+					sendGaEvent('Subscribe', 'Click', 'SubsDesktopNoRes');
+					ga_GetUserEmail();
+				}
+				function ga_SubsMobileMenu() { sendGaEvent('Subscribe', 'Click', 'SubsMobileMenu'); }
+				function ga_SubsMobileFooter() { sendGaEvent('Subscribe', 'Click', 'SubsMobileFooter'); }
+				function ga_SubsMobileNoRes() { sendGaEvent('Subscribe', 'Click', 'SubsMobileNoRes'); }
+				function ga_GetUserEmail() { sendGaEvent('Subscribe', 'GetUserEmail'); }
+				function ga_PageButtonClick() { sendGaEvent('Button', 'Click', 'UsePaging'); }
+				function ga_SearchFormFocus() { sendGaEvent('SearchForm', 'Focus', 'UseSearchForm'); }
+				function ga_JdpClickAwayTotal() { sendGaEvent('Button', 'Click', 'JdpClickAwayTotal'); }
+				function ga_JdpClickApplyTotal() { sendGaEvent('Button', 'Click', 'JdpClickApplyTotal'); }
+				function ga_JdpClickMappedApplyTotal() { sendGaEvent('Button', 'Click', 'JdpClickMappedApplyTotal'); }
+				function ga_CrazyPopupQuestionShow() { sendGaEvent('Subscribe', 'Show', 'CrazyPopupQuestionShow'); }
+				function ga_SecondStagePopupShow() { sendGaEvent('Subscribe', 'Show', 'SecondStagePopupShow'); }
+				function ga_Edit2StagePopup() { sendGaEvent('Subscribe', 'Click', 'Edit2StagePopup'); }
+				function ga_SubscribePopupShow() { sendGaEvent('Subscribe', 'Show', 'SubscribePopupShow'); }
+				function ga_ConfirmPopupShow() { sendGaEvent('Subscribe', 'Show', 'ConfirmPopupShow'); }
+				function ga_SubscribeDesktopPopupShow() { sendGaEvent('Subscribe', 'Show', 'SubscribeDesktopPopupShow'); }
+				function ga_PopupSubsValidationPassedOnlyDesktop() { sendGaEvent('Subscribe', 'Click', 'PopupSubsValidationPassedOnlyDesktop'); }
+				function ga_PopupSubsValidationFailedOnlyDesktop() { sendGaEvent('Subscribe', 'Click', 'PopupSubsValidationFailedOnlyDesktop'); }
+				function ga_PopupSubsValidationPassedOnlyMobile() { sendGaEvent('Subscribe', 'Click', 'PopupSubsValidationPassedOnlyMobile'); }
+				function ga_PopupSubsValidationFailedOnlyMobile() { sendGaEvent('Subscribe', 'Click', 'PopupSubsValidationFailedOnlyMobile'); }
+				function ga_OpenMailFromConfirmPopupShow() { sendGaEvent('Subscribe', 'Show', 'OpenMailFromConfirmPopupShow'); }
+				function ga_OpenMailFromConfirmPopup() { sendGaEvent('Subscribe', 'Click', 'OpenMailFromConfirmPopup'); }
+				function ga_SaveVacancyAnywhere() { sendGaEvent('Urls', 'Click', 'SaveVacancyAnywhere') };
+
+
+				function df() { sendGaEvent('Filters', 'Click', 'DateFilter'); }
+				function af() { sendGaEvent('Filters', 'Click', 'ApplyFilter'); }
+				function sf() { sendGaEvent('Filters', 'Click', 'SalaryFilter'); }
+				function dsf() { sendGaEvent('Filters', 'Click', 'DistanceFilter'); }
+				function lf() { sendGaEvent('Filters', 'Click', 'LocationFilter'); }
+				function cf() { sendGaEvent('Filters', 'Click', 'AnyFilter'); }
+				function ssf() { sendGaEvent('Filters', 'Click', 'SuggestFilter'); }
+				function ga_JobTypeFilter() { sendGaEvent('Filters', 'Click', 'JobTypeFilter'); }
+
+				function svc() { sendGaEvent('VacancySave', 'Click', 'Save Vacancy'); }
+				function jdt() { sendGaEvent('Button', 'Click', 'JobDescTop'); }
+				function jdb() { sendGaEvent('Button', 'Click', 'JobDescBottom'); }
+				function jdc() { sendGaEvent('Button', 'Click', 'JobDescContacts'); }
+				function jdsv() { sendGaEvent('VacancySaveJDP', 'Click', 'Save Vacancy from JDP'); }
+				function confirmClick() { sendGaEvent('Button', 'Click', 'ConfirmAccount'); }
+				function ads_click() { sendGaEvent('adsense_iframe', 'click', 'eve'); }
+				function ga_jdpNullResultOpen() { sendGaEvent('InactiveJob', 'Show', 'OpenInactiveJob'); }
+				function ga_jdpNullTopInactiveJob() { sendGaEvent('InactiveJob', 'Click', 'TopInactiveJob'); }
+				function ga_jdpNullBottomInactiveJob() { sendGaEvent('InactiveJob', 'Click', 'BottomInactiveJob'); }
+
+				//apply form
+				function af_fromApply() { sendGaEvent('Apply Form', 'Click', 'FromApply'); }
+				function af_uploadFileWindowOpen() { sendGaEvent('Apply Form', 'Click', 'Open Upload Window'); }
+				function af_uploadFileWindowFail() { sendGaEvent('Apply Form', 'Click', 'Fail Open Upload Window'); }
+				function af_jdpClickTop() { sendGaEvent('Button', 'Click', 'JobDescApplyTop'); }
+				function af_jdpClickBottom() { sendGaEvent('Button', 'Click', 'JobDescApplyBottom'); }
+				function af_applySuccess() { sendGaEvent('Button', 'Click', 'JobApplyForm'); }
+				function af_applyFailed() { sendGaEvent('Button', 'Click', 'JobApplyFormFailed'); }
+				function af_mappedApplySuccess() { sendGaEvent('Button', 'Click', 'JobMappedApplyForm'); }
+				function af_mappedApplyFailed() { sendGaEvent('Button', 'Click', 'JobMappedApplyFormFailed'); }
+				function af_joobleApplySuccess() { sendGaEvent('form', 'send', 'send_cv'); }
+				//pwa
+				function pwa_showInstallSuggestion() { sendGaEvent('Banner', 'Show', 'PWAShowInstallSuggestion'); }
+				function pwa_installAccept() { sendGaEvent('Button', 'Click', 'PWAInstallAccept'); }
+				function pwa_installDismiss() { sendGaEvent('Button', 'Click', 'PWAInstallDismiss'); }
+				function pwa_startSession() { sendGaEvent('FlashScreen', 'Start', 'PWAStartSession'); }
+				function pwa_showPushHintPopup() { sendGaEvent('Banner', 'Show', 'PWAShowPushHintPopup'); }
+				function pwa_getPushClick() { sendGaEvent('Button', 'Click', 'PWAGetPushAccept'); }
+
+				// account
+				// Incorrect input login or password event.
+				function AccountFailAuthorize(field) { sendGaEvent('Account', 'Authorization', 'Incorrect' + field); }
+				function ga_AccountPopupSignUp() { sendGaEvent('Account', 'Click', 'AccountPopupSignUp'); }
+				function ga_AccountPopupRegister() { sendGaEvent('Account', 'Click', 'AccountPopupRegister'); }
+				function ga_AccountSignUpButton() { sendGaEvent('Account', 'Click', 'AccountSignUpButton'); }
+
+				function ga_addSubBtnClick() { sendGaEvent('Button', 'Click', 'AddSubs'); }
+
+				var MobileSubsPopupGA = new (function () {
+					this.ConfirmPopupShow = function () { sendGaEvent('Subscribe', 'Show', 'ConfirmPopupShow_MobileSubsPopupTest'); };
+					this.CrazyPopupShow = function () { sendGaEvent('Subscribe', 'Show', 'CrazyPopupQuestionShow_MobileSubsPopupTest'); };
+					this.CrazyPopupBackToSerpShow = function () { sendGaEvent('Subscribe', 'Show', 'MobileCrazyPopupBackToSerpShow'); };
+					this.pvf = function () { sendGaEvent('Subscribe', 'Click', 'PopupSubscribeClickValidationFailed_MobileSubsPopupTest'); };
+					this.pvp = function () { sendGaEvent('Subscribe', 'Click', 'PopupSubscribeClickValidationPassed_MobileSubsPopupTest'); };
+					this.SubscribePopupYes = function () { sendGaEvent('Subscribe', 'Click', 'SubscribePopupQuestion_Yes_MobileSubsPopupTest'); };
+					this.PopupSubsValidationPassedOnlyMobile = function () { sendGaEvent('Subscribe', 'Click', 'PopupSubsValidationPassedOnlyMobile_MobileSubsPopupTest'); };
+					this.PopupSubsValidationFailedOnlyMobile = function () { sendGaEvent('Subscribe', 'Click', 'PopupSubsValidationFailedOnlyMobile_MobileSubsPopupTest'); };
+					this.OpenMailFromConfirmPopup = function () { sendGaEvent('Subscribe', 'Click', 'OpenMailFromConfirmPopup_MobileSubsPopupTest'); };
+					this.OpenMailFromConfirmPopupShow = function () { sendGaEvent('Subscribe', 'Show', 'OpenMailFromConfirmPopupShow_MobileSubsPopupTest'); };
+					this.SubscribePopupShow = function () { sendGaEvent('Subscribe', 'Show', 'SubscribePopupShow_MobileSubsPopupTest'); };
+					this.SubsMobilePopup = function () {
+						sendGaEvent('Subscribe', 'Click', 'SubsMobilePopup_MobileSubsPopupTest');
+						sendGaEvent('Subscribe', 'GetUserEmail_MobileSubsPopupTest');
+					};
+				})();
+
+				var MobileJdp = new (function () {
+					this.NextButtonClick = function () { sendGaEvent('Jdp', 'Click', 'NextButtonClick'); };
+					this.PreviousArrowClick = function () { sendGaEvent('Jdp', 'Click', 'PreviousArrowClick'); };
+					this.NextArrowClick = function () { sendGaEvent('Jdp', 'Click', 'NextArrowClick'); };
+					this.SwipeToPrevious = function () { sendGaEvent('Jdp', 'Swipe', 'SwipeToPrevious'); };
+					this.SwipeToNext = function () { sendGaEvent('Jdp', 'Swipe', 'SwipeToNext'); };
+					this.PageView = function () { ga('send', 'pageview') };
+					this.VirtualPageView = function () { sendGaEvent('VirtualPageview', 'Show', 'OpenJDPShow'); };
+					this.GoToResultsClick = function () { sendGaEvent('Jdp', 'Click', 'GoToResultsClick'); };
+				})();
+
+				var MobileSerp = new (function () {
+					this.PageView = function () { ga('send', 'pageview', '/serp?q='); };
+					this.LoadInfiniteScrollPage = function () { ga('send', 'LoadInfiniteScrollPage'); };
+				})();
+
+				function ga_obShortReviewClick() { sendGaEvent('Button', 'Click', 'OnBoardingShortReview'); }
+				function ga_obCompleteReviewClick() { sendGaEvent('Button', 'Click', 'OnBoardingCompleteReview'); }
+				function ga_obSkipAddCv() { sendGaEvent('Button', 'Click', 'OnBoardingSkipAddCv'); }
+
+				function ga_obShortReviewClickMobile() { sendGaEvent('Button', 'Click', 'OnBoardingShortReviewMobile'); }
+				function ga_obCompleteReviewClickMobile() { sendGaEvent('Button', 'Click', 'OnBoardingCompleteReviewMobile'); }
+				function ga_RecentSearchTapped() { sendGaEvent('new jobs notification', 'recent search tapped', 'QTY_OF_NEW_JOBS'); }
+				function ga_BellTapped() { sendGaEvent('new jobs notification', 'bell tapped', 'QTY_OF_NEW_JOBS_IN_BELL'); }
+			
+				ga('send', 'event', 'VirtualPageview', 'Show', 'OpenJDPShow');
+	</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NBZ2BM7');</script>
+<!-- End Google Tag Manager -->
+	
+	
+	
+			<input type="hidden" id="sentryConfig" data-env="production" data-dsn="https://67ad0ebabc8d4ab482dff540686f0030@nl-sentry.jooble.org/3" data-release="20-01-24-x-team - 4700">
+
+	<script src="./example_files/commonDesk.js.last ned" type="text/javascript" defer=""></script>
+<script src="./example_files/logger.js.last ned" type="text/javascript" defer=""></script>
+<script src="./example_files/jdpDesk.js.last ned" type="text/javascript" defer=""></script>
+
+	
+	<input type="hidden" id="recapthca-url" value="https://www.google.com/recaptcha/api.js?hl=no&amp;onload=CALLBACK_FUNC&amp;render=explicit">
+	
+			<div class="gdpr-consent-banner gdpr-banner-js">
+			<div class="gdpr-consent-banner__wrap">
+				<p>
+					Vi bruker informasjonskapsler for å forbedre opplevelsen av nettleseren din på vår nettside, vise personlig innhold og målrettet reklame, samt analysering av trafikken på nettstedet.
+				</p>
+				<div class="gdpr-consent-banner__button-wrap">
+					<a class="gdpr-consent-banner__button" data-href="https://no.jooble.org/info/privacy" style="cursor: pointer;">
+						Mer info
+					</a>
+					<button class="gdpr-consent-banner__button gdpr-accept-js gdpr-accept__highlighted">Aksepter</button>
+				</div>
+			</div>
+		</div>
+
+	
+	
+
+<div id="toaster"></div>
+<script type="text/javascript" id="" src="./example_files/js"></script>
+<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","105024613572435");fbq("track","PageView");</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=105024613572435&amp;ev=PageView&amp;noscript=1"></noscript>
+
+
+<script type="text/javascript" id="">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","AW-927768959");</script></body></html>
