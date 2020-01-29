@@ -12,6 +12,9 @@ search_url = "https://no.jooble.org/jobb-ekstrahjelper%2Fbutikkselger-deltid/Sta
 target_string = "ckey=ekstrahjelper%2fbutikkselger+deltid"
 numOfLinks = 0
 numOfPagesSearched = int(input("Number of pages you want searched (max 41 atm): "))
+nameStr = input('Full name: ')
+numStr = input('Phone number: ')
+emailStr = input('E-mail: ')
 linkRecurrence = {}
 start_time = time.time()
 for i in range(numOfPagesSearched):
@@ -44,7 +47,7 @@ for i in range(numOfPagesSearched):
         print(f"Handling: {company}")
         location = valueList[1]
         document = MailMerge(template)
-        document.merge(date='{:%d-%b-%Y}'.format(date.today()), company=company, link=link)
+        document.merge(date='{:%d-%b-%Y}'.format(date.today()), company=company, link=link, name=nameStr, email=emailStr, number=numStr)
         document.write(f"mainFolder/applications/{name}.docx")
 
 print(f"Number of links handled: {numOfLinks}, time elapsed: {int(time.time()-start_time)}s")
