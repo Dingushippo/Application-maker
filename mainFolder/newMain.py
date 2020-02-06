@@ -10,7 +10,7 @@ import urllib.parse as urlP
 import time
 import re
 import math
-import secret
+import secret # Secret.py file with email and password variable for finn.no
 import os
 
 window = 0
